@@ -1,0 +1,80 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+group = 'io.modelcontextprotocol'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://repo.gradle.org/gradle/libs-releases/'
+    }
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+dependencies {
+    // MCP SDK
+    implementation 'io.modelcontextprotocol.sdk:mcp:0.10.0'
+    
+    // Gradle Tooling API
+    implementation 'org.gradle:gradle-tooling-api:8.14.2'
+    
+    // Reactive Extensions
+    implementation 'io.projectreactor:reactor-core:3.6.11'
+    
+    // Logging
+    implementation 'org.slf4j:slf4j-api:2.0.16'
+    implementation 'ch.qos.logback:logback-classic:1.5.12'
+    
+    // JSON Processing
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.2'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.18.2'
+    
+    // Apache Commons
+    implementation 'org.apache.commons:commons-lang3:3.17.0'
+    implementation 'commons-io:commons-io:2.18.0'
+    
+    // Testing
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.11.3'
+    testImplementation 'org.mockito:mockito-core:5.14.2'
+    testImplementation 'org.assertj:assertj-core:3.26.3'
+    testImplementation 'io.projectreactor:reactor-test:3.6.11'
+}
+
+application {
+    mainClass = 'io.modelcontextprotocol.gradleserver.GradleMcpServerMain'
+}
+
+shadowJar {
+    archiveBaseName = 'mcp-gradle-server'
+    archiveClassifier = 'all'
+    mergeServiceFiles()
+    
+    manifest {
+        attributes(
+            'Main-Class': 'io.modelcontextprotocol.gradleserver.GradleMcpServerMain',
+            'Implementation-Title': 'MCP Gradle Server',
+            'Implementation-Version': project.version
+        )
+    }
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+        exceptionFormat "full"
+    }
+}
+
+tasks.named('wrapper') {
+    gradleVersion = '8.11.1'
+    distributionType = Wrapper.DistributionType.ALL
+}
