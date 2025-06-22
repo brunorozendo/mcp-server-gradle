@@ -1,4 +1,4 @@
-package io.modelcontextprotocol.gradleserver.handlers;
+package com.brunorozendo.mcp.server.gradle.handlers;
 
 import io.modelcontextprotocol.spec.McpSchema;
 import reactor.core.publisher.Mono;

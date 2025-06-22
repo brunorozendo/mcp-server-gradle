@@ -1,4 +1,4 @@
-package io.modelcontextprotocol.gradleserver;
+package com.brunorozendo.mcp.server.gradle;
 
 import org.gradle.tooling.GradleConnector;
 import org.gradle.tooling.ProjectConnection;

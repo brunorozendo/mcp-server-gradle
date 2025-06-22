@@ -1,14 +1,17 @@
-package io.modelcontextprotocol.gradleserver;
+package com.brunorozendo.mcp.server.gradle;
 
+import com.brunorozendo.mcp.server.gradle.handlers.GradleBuildHandler;
+import com.brunorozendo.mcp.server.gradle.handlers.GradleCleanHandler;
+import com.brunorozendo.mcp.server.gradle.handlers.GradleDependenciesHandler;
+import com.brunorozendo.mcp.server.gradle.handlers.GradleTasksHandler;
+import com.brunorozendo.mcp.server.gradle.handlers.GradleTestHandler;
 import io.modelcontextprotocol.server.McpServer;
 import io.modelcontextprotocol.server.McpAsyncServer;
 import io.modelcontextprotocol.server.McpAsyncServerExchange;
 import io.modelcontextprotocol.server.transport.StdioServerTransportProvider;
 import io.modelcontextprotocol.spec.McpSchema;
-import io.modelcontextprotocol.gradleserver.handlers.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import reactor.core.publisher.Mono;
 
 import java.util.Map;
 

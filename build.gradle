@@ -1,10 +1,12 @@
 plugins {
     id 'java'
     id 'application'
-    id 'com.github.johnrengelman.shadow' version '8.1.1'
+    id 'groovy'
+    id 'jacoco' // For code coverage
+    id 'org.graalvm.buildtools.native' version '0.10.6'
 }
 
-group = 'io.modelcontextprotocol'
+group = 'com.brunorozendo'
 version = '1.0.0'
 
 repositories {
@@ -30,51 +32,101 @@ dependencies {
     implementation 'io.projectreactor:reactor-core:3.6.11'
     
     // Logging
-    implementation 'org.slf4j:slf4j-api:2.0.16'
-    implementation 'ch.qos.logback:logback-classic:1.5.12'
+    implementation 'org.slf4j:slf4j-api:2.0.17'
+    implementation 'ch.qos.logback:logback-classic:1.5.18'
+    implementation 'ch.qos.logback:logback-core:1.5.18'
     
     // JSON Processing
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.2'
-    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.18.2'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.19.1'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.19.1'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.19.1'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.19.1'
     
     // Apache Commons
     implementation 'org.apache.commons:commons-lang3:3.17.0'
     implementation 'commons-io:commons-io:2.18.0'
     
-    // Testing
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.11.3'
-    testImplementation 'org.mockito:mockito-core:5.14.2'
-    testImplementation 'org.assertj:assertj-core:3.26.3'
-    testImplementation 'io.projectreactor:reactor-test:3.6.11'
+
 }
 
 application {
-    mainClass = 'io.modelcontextprotocol.gradleserver.GradleMcpServerMain'
+    mainClass = 'com.brunorozendo.mcp.server.gradle.GradleMcpServerMain'
 }
 
-shadowJar {
-    archiveBaseName = 'mcp-gradle-server'
-    archiveClassifier = 'all'
-    mergeServiceFiles()
-    
+
+// Create a fat jar for easier distribution
+jar {
     manifest {
         attributes(
-            'Main-Class': 'io.modelcontextprotocol.gradleserver.GradleMcpServerMain',
-            'Implementation-Title': 'MCP Gradle Server',
-            'Implementation-Version': project.version
+                'Main-Class': 'com.brunorozendo.mcp.server.gradle.GradleMcpServerMain'
         )
     }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    // Exclude signature files to avoid security exceptions
+    exclude 'META-INF/*.RSA', 'META-INF/*.SF', 'META-INF/*.DSA'
 }
 
-test {
+
+test{
     useJUnitPlatform()
     testLogging {
-        events "passed", "skipped", "failed"
-        exceptionFormat "full"
+        //events "FAILED","PASSED","SKIPPED","STANDARD_ERROR","STANDARD_OUT","STARTED"
+        events "FAILED","PASSED","SKIPPED"
+    }
+    finalizedBy jacocoTestReport // Generate report after tests run
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+        html.required = true
+    }
+
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    // Add any exclusions here if needed
+            ])
+        }))
     }
 }
 
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.80 // 80% coverage required
+            }
+        }
+    }
+}
+
+check.dependsOn jacocoTestCoverageVerification
+
+
+graalvmNative {
+    toolchainDetection = true
+    binaries {
+        main {
+            imageName = 'mcp-server-command'
+            mainClass = application.mainClass.get()
+            buildArgs.add('--no-fallback')
+            buildArgs.add('-H:+ReportExceptionStackTraces')
+            buildArgs.add('--initialize-at-build-time=org.slf4j')
+            buildArgs.add('--initialize-at-build-time=ch.qos.logback')
+            buildArgs.add('--enable-https')
+            buildArgs.add('--enable-all-security-services')
+            // Configuration files will be picked up automatically from META-INF/native-image
+        }
+    }
+}
+
+
 tasks.named('wrapper') {
-    gradleVersion = '8.11.1'
+    gradleVersion = '8.14.2'
     distributionType = Wrapper.DistributionType.ALL
 }

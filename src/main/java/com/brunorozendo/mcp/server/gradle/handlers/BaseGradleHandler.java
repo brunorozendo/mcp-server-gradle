@@ -1,19 +1,17 @@
-package io.modelcontextprotocol.gradleserver.handlers;
+package com.brunorozendo.mcp.server.gradle.handlers;
 
+import com.brunorozendo.mcp.server.gradle.GradleConnectionManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.modelcontextprotocol.gradleserver.GradleConnectionManager;
 import io.modelcontextprotocol.spec.McpSchema;
 import org.gradle.tooling.BuildLauncher;
 import org.gradle.tooling.ProjectConnection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import reactor.core.publisher.Mono;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Base class for all Gradle tool handlers.

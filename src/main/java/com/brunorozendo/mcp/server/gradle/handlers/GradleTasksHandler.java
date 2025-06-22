@@ -1,13 +1,11 @@
-package io.modelcontextprotocol.gradleserver.handlers;
+package com.brunorozendo.mcp.server.gradle.handlers;
 
 import io.modelcontextprotocol.spec.McpSchema;
-import org.gradle.tooling.GradleConnector;
 import org.gradle.tooling.ProjectConnection;
 import org.gradle.tooling.model.GradleProject;
 import org.gradle.tooling.model.GradleTask;
 import reactor.core.publisher.Mono;
 
-import java.io.File;
 import java.util.*;
 import java.util.stream.Collectors;
 
