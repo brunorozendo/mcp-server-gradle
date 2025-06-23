@@ -112,7 +112,7 @@ graalvmNative {
     toolchainDetection = true
     binaries {
         main {
-            imageName = 'mcp-server-command'
+            imageName = 'mcp-server-gradle'
             mainClass = application.mainClass.get()
             buildArgs.add('--no-fallback')
             buildArgs.add('-H:+ReportExceptionStackTraces')
