@@ -1,69 +1,102 @@
 [
   {
     "name": "io.modelcontextprotocol.spec.McpSchema",
-    "allDeclaredFields": true,
+    "allDeclaredConstructors": true,
+    "allPublicConstructors": true,
     "allDeclaredMethods": true,
-    "allDeclaredConstructors": true
+    "allPublicMethods": true,
+    "allDeclaredFields": true,
+    "allPublicFields": true
   },
   {
     "name": "io.modelcontextprotocol.spec.McpSchema$JsonSchema",
-    "allDeclaredFields": true,
+    "allDeclaredConstructors": true,
+    "allPublicConstructors": true,
     "allDeclaredMethods": true,
-    "allDeclaredConstructors": true
+    "allPublicMethods": true,
+    "allDeclaredFields": true,
+    "allPublicFields": true
   },
   {
     "name": "io.modelcontextprotocol.spec.McpSchema$Tool",
-    "allDeclaredFields": true,
+    "allDeclaredConstructors": true,
+    "allPublicConstructors": true,
     "allDeclaredMethods": true,
-    "allDeclaredConstructors": true
+    "allPublicMethods": true,
+    "allDeclaredFields": true,
+    "allPublicFields": true
   },
   {
     "name": "io.modelcontextprotocol.spec.McpSchema$CallToolResult",
-    "allDeclaredFields": true,
+    "allDeclaredConstructors": true,
+    "allPublicConstructors": true,
     "allDeclaredMethods": true,
-    "allDeclaredConstructors": true
+    "allPublicMethods": true,
+    "allDeclaredFields": true,
+    "allPublicFields": true
   },
   {
     "name": "io.modelcontextprotocol.spec.McpSchema$TextContent",
-    "allDeclaredFields": true,
+    "allDeclaredConstructors": true,
+    "allPublicConstructors": true,
     "allDeclaredMethods": true,
-    "allDeclaredConstructors": true
+    "allPublicMethods": true,
+    "allDeclaredFields": true,
+    "allPublicFields": true
   },
   {
     "name": "io.modelcontextprotocol.spec.McpSchema$Content",
-    "allDeclaredFields": true,
+    "allDeclaredConstructors": true,
+    "allPublicConstructors": true,
     "allDeclaredMethods": true,
-    "allDeclaredConstructors": true
+    "allPublicMethods": true,
+    "allDeclaredFields": true,
+    "allPublicFields": true
   },
   {
     "name": "io.modelcontextprotocol.spec.McpSchema$Implementation",
-    "allDeclaredFields": true,
+    "allDeclaredConstructors": true,
+    "allPublicConstructors": true,
     "allDeclaredMethods": true,
-    "allDeclaredConstructors": true
+    "allPublicMethods": true,
+    "allDeclaredFields": true,
+    "allPublicFields": true
   },
   {
     "name": "io.modelcontextprotocol.spec.McpSchema$InitializeRequest",
-    "allDeclaredFields": true,
+    "allDeclaredConstructors": true,
+    "allPublicConstructors": true,
     "allDeclaredMethods": true,
-    "allDeclaredConstructors": true
+    "allPublicMethods": true,
+    "allDeclaredFields": true,
+    "allPublicFields": true
   },
   {
     "name": "io.modelcontextprotocol.spec.McpSchema$InitializeResult",
-    "allDeclaredFields": true,
+    "allDeclaredConstructors": true,
+    "allPublicConstructors": true,
     "allDeclaredMethods": true,
-    "allDeclaredConstructors": true
+    "allPublicMethods": true,
+    "allDeclaredFields": true,
+    "allPublicFields": true
   },
   {
     "name": "io.modelcontextprotocol.spec.McpSchema$ServerCapabilities",
-    "allDeclaredFields": true,
+    "allDeclaredConstructors": true,
+    "allPublicConstructors": true,
     "allDeclaredMethods": true,
-    "allDeclaredConstructors": true
+    "allPublicMethods": true,
+    "allDeclaredFields": true,
+    "allPublicFields": true
   },
   {
     "name": "io.modelcontextprotocol.spec.McpSchema$ClientCapabilities",
-    "allDeclaredFields": true,
+    "allDeclaredConstructors": true,
+    "allPublicConstructors": true,
     "allDeclaredMethods": true,
-    "allDeclaredConstructors": true
+    "allPublicMethods": true,
+    "allDeclaredFields": true,
+    "allPublicFields": true
   },
   {
     "name": "ch.qos.logback.core.rolling.TimeBasedRollingPolicy",
@@ -157,6 +190,15 @@
   },
   {
     "name": "io.modelcontextprotocol.spec.McpSchema$Error",
+    "allDeclaredConstructors": true,
+    "allPublicConstructors": true,
+    "allDeclaredMethods": true,
+    "allPublicMethods": true,
+    "allDeclaredFields": true,
+    "allPublicFields": true
+  },
+  {
+    "name": "io.modelcontextprotocol.spec.McpSchema$CallToolRequest",
     "allDeclaredConstructors": true,
     "allPublicConstructors": true,
     "allDeclaredMethods": true,
